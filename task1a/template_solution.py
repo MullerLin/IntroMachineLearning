@@ -4,7 +4,8 @@
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import KFold
-
+from sklearn.linear_model import Ridge
+from sklearn.metrics import mean_squared_error
 
 def fit(X, y, lam):
     """
@@ -24,6 +25,9 @@ def fit(X, y, lam):
     """
     w = np.zeros((13,))
     # TODO: Enter your code here
+    ridge_reg = Ridge(alpha=lam, fit_intercept=False)
+    ridge_reg.fit(X, y)
+    w = ridge_reg.coef_
     assert w.shape == (13,)
     return w
 
@@ -44,6 +48,8 @@ def calculate_RMSE(w, X, y):
     """
     RMSE = 0
     # TODO: Enter your code here
+    y_pred = np.matmul(X, w)
+    RMSE = mean_squared_error(y, y_pred, squared=False)
     assert np.isscalar(RMSE)
     return RMSE
 
@@ -68,7 +74,14 @@ def average_LR_RMSE(X, y, lambdas, n_folds):
 
     # TODO: Enter your code here. Hint: Use functions 'fit' and 'calculate_RMSE' with training and test data
     # and fill all entries in the matrix 'RMSE_mat'
-
+    for index_lam, lam in enumerate(lambdas):
+        kf = KFold(n_splits = n_folds)
+        index_kSet = 0
+        for train_index, valid_index in kf.split(X):
+            weight = fit(X[train_index], y[train_index], lam)
+            RMSE = calculate_RMSE(weight, X[valid_index], y[valid_index])
+            RMSE_mat[index_kSet, index_lam] = RMSE
+            index_kSet= index_kSet + 1
     avg_RMSE = np.mean(RMSE_mat, axis=0)
     assert avg_RMSE.shape == (5,)
     return avg_RMSE
