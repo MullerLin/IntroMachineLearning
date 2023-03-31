@@ -48,7 +48,8 @@ def calculate_RMSE(w, X, y):
     """
     RMSE = 0
     # TODO: Enter your code here
-    y_pred = np.matmul(X, w)
+    y_pred = X @ w
+    # y_pred = np.matmul(X, w)
     RMSE = mean_squared_error(y, y_pred, squared=False)
     assert np.isscalar(RMSE)
     return RMSE
