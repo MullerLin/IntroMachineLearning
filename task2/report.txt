@@ -1,7 +1,7 @@
-The aim of the task is to predict eletricity prices in Switzerland based on the price of some other countries and additional features. Considering the given data and the task requirement, the task is implmented in two steps: the first step is data encode and impution, and the second is Gaussian Kernelized Regression Models and Prediction.
+The aim of the task is to predict electricity prices in Switzerland based on the price of some other countries and additional features. Considering the given data and the task requirement, the task is implemented in two steps: the first step is data encode and impution, and the second is Gaussian Kernelized Regression Models and Prediction.
 
-In the first step, the data was imputed and encoded. To converted the season in the data, the season was encoded with one-hot encoder. To deal with the missing value, KNN imputer was applied to impute the data. Methods with different number of nearest points and weight methods were tested by cross-validation to achieve higher accuracy.
+In the first step, the data was imputed and encoded. To convert the season in the data, the season was encoded with a one-hot encoder. To deal with the missing value, a KNN imputer was applied to impute the data. Methods with different numbers of nearest points and weight methods were tested by cross-validation to achieve higher accuracy.
 
-In the second step, Gaussian kernel regression models was applied to make predictions. Different kernels and combinations of kernels with different hyperparameters were tested by cross-validation to achieve higher accuracy.
+In the second step, Gaussian kernel regression models were applied to make predictions. Different kernels and combinations of kernels with different hyperparameters were tested by cross-validation to achieve higher accuracy.
 
 According to the experiments, the fewer number of the nearest neighbours led to higher accuracy. Additionally, the combination of Matern and Rational Quadratic Kernel achieved higher accuracy.
